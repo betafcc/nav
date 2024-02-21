@@ -1,6 +1,3 @@
-# depends on: exa, bfs, fzf, sed, printf
-# PS1="%~ ❱ "
-
 nav() {
     local command="${1:-help}"
 
@@ -8,8 +5,8 @@ nav() {
     bindkeys)
         bindkey '^[[1;9A' nav-up      # alt + up
         bindkey '^[[1;9B' nav-down    # alt + down
-        bindkey '^[[1;9D' nav-back    # alt + left
         bindkey '^[[1;9C' nav-forward # alt + right
+        bindkey '^[[1;9D' nav-back    # alt + left
         ;;
 
     history)
@@ -93,23 +90,11 @@ _nav-descend() {
     *) fzf_prompt="${PWD}/" ;;
     esac
 
-    if command -v exa >/dev/null 2>&1; then
-        preview_cmd="exa --color=always --group-directories-first --all --icons --oneline {}"
-    else
-        preview_cmd="ls -1A {}"
-    fi
-
-    if command -v bfs >/dev/null 2>&1; then
-        find_cmd="bfs -x -type d -exclude -name '.git' -exclude -name 'node_modules' 2>/dev/null"
-    else
-        find_cmd="find . -type d \( ! -name '.git' -a ! -name 'node_modules' \) 2>/dev/null"
-    fi
-
     selected=$(
-        eval "${find_cmd}" |
+        eval "${NAV_FIND_COMMAND}" |
             sed 's:$:/:' |
             fzf --prompt "${fzf_prompt}" --query "" --info hidden --filepath-word \
-                --height 80% --layout reverse --preview "${preview_cmd}" --preview-window 'right:60%' \
+                --height 80% --layout reverse --preview "${NAV_PREVIEW_COMMAND}" --preview-window 'right:60%' \
                 --color 'light' --color 'gutter:-1,bg+:#ff6666,fg+:-1:bold,hl:#66ff66:bold' \
                 --no-sort --tiebreak=index --no-multi --bind 'tab:replace-query+top,shift-tab:backward-kill-word+top'
     )
@@ -121,12 +106,22 @@ typeset -g _nav_index=0
 typeset -g _nav_push=true
 
 if [[ ! -v NAV_PREVIEW_COMMAND ]]; then
+    typeset -g NAV_PREVIEW_COMMAND
+    if command -v exa >/dev/null 2>&1; then
+        NAV_PREVIEW_COMMAND="exa --color=always --group-directories-first --all --icons --oneline {}"
+    else
+        NAV_PREVIEW_COMMAND="ls -1A {}"
+    fi
 fi
 
 if [[ ! -v NAV_FIND_COMMAND ]]; then
+    typeset -g NAV_FIND_COMMAND
+    if command -v bfs >/dev/null 2>&1; then
+        NAV_FIND_COMMAND="bfs -x -type d -exclude -name '.git' -exclude -name 'node_modules' 2>/dev/null"
+    else
+        NAV_FIND_COMMAND="find . -type d \( ! -name '.git' -a ! -name 'node_modules' \) 2>/dev/null"
+    fi
 fi
-
-# FZF_DEFAULT_COMMAND
 
 nav push
 

@@ -5,6 +5,13 @@ nav
 </h1>
 
 zsh navigation at the speed of thought with `alt` + `arrow`
+
+
+<picture>
+  <source srcset="./demo/demo-rec.svg">
+  <img alt="Screencast" src="./demo/demo-rec.svg">
+</picture>
+
 </div>
 
 Usage

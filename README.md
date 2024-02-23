@@ -27,6 +27,17 @@ The shortcuts can be customized, see [config](#config). By default they are insp
 
 `alt` + `→` - go forward in directory history
 
+Try it out
+----------
+
+You can try it out without installing, ideally if you already have the [required dependencies](#custom-installation) on your path.
+
+Just run:
+
+```zsh
+source <(curl -s 'https://raw.githubusercontent.com/betafcc/nav/main/nav.zsh') && nav bindkeys
+```
+
 Installation
 ------------
 

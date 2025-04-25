@@ -107,8 +107,8 @@ typeset -g _nav_push=true
 
 if [[ ! -v NAV_PREVIEW_COMMAND ]]; then
     typeset -g NAV_PREVIEW_COMMAND
-    if command -v exa >/dev/null 2>&1; then
-        NAV_PREVIEW_COMMAND="exa --color=always --group-directories-first --all --icons --oneline {}"
+    if command -v eza >/dev/null 2>&1; then
+        NAV_PREVIEW_COMMAND="eza --color=always --group-directories-first --all --icons --oneline {}"
     else
         NAV_PREVIEW_COMMAND="ls -1A {}"
     fi

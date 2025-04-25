@@ -49,7 +49,7 @@ The following command installs all dependencies, nav itself, adds sourcing comma
 <tr>
 <td>
 <pre>
-apt install fzf bfs exa &&
+apt install fzf bfs eza &&
   cd ~ &&
   git clone https://github.com/betafcc/nav &&
   echo -e '\nsource "${HOME}/nav/nav.zsh" && nav bindkeys\n' >> .zshrc &&
@@ -62,7 +62,7 @@ apt install fzf bfs exa &&
 <tr>
 <td>
 <pre>
-brew install fzf bfs exa &&
+brew install fzf bfs eza &&
   cd ~ &&
   git clone https://github.com/betafcc/nav &&
   echo -e '\nsource "${HOME}/nav/nav.zsh" && nav bindkeys\n' >> .zshrc &&
@@ -106,16 +106,16 @@ Dramatically increases the speed of fuzzy finding directories, `nav` will use th
 </tbody>
 </table>
 
-#### [exa](https://github.com/ogham/exa) `optional`
+#### [eza](https://github.com/eza-community/eza) `optional`
 
 > A modern replacement for ‘ls’.
 
-Improves the preview of folders, `nav` will use `ls` if `exa` is not available
+Improves the preview of folders, `nav` will use `ls` if `eza` is not available
 
 <table>
 <tbody>
 <tr><th>Linux</th><th>Mac</th></tr>
-<tr><td><pre>apt install exa</pre></td><td><pre>brew install exa</pre></td></tr>
+<tr><td><pre>apt install eza</pre></td><td><pre>brew install eza</pre></td></tr>
 </tbody>
 </table>
 
@@ -207,8 +207,8 @@ NAV_FIND_COMMAND="find . -type d \( ! -name '.git' -a ! -name 'node_modules' \) 
 You can change based on what is used by default:
 
 ```sh
-# If `exa` is available:
-NAV_PREVIEW_COMMAND="exa --color=always --group-directories-first --all --icons --oneline {}"
+# If `eza` is available:
+NAV_PREVIEW_COMMAND="eza --color=always --group-directories-first --all --icons --oneline {}"
 
 # otherwise:
 NAV_PREVIEW_COMMAND="ls -1A {}"
